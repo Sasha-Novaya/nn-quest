@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101c2b">
+<meta name="description" content="Интерактивное задание городского квеста Нижний Новгород — сквозь века: Пакгаузы на Стрелке.">
+<title>Пакгаузы · Машина времени | Нижний Новгород — сквозь века</title>
+<style>
+:root{--ink:#16243a;--night:#111b2b;--night2:#1a3044;--cream:#fbefd6;--paper:#f2dfb8;--gold:#d5aa65;--brass:#96602f;--burgundy:#833b49;--blue:#82c6d0;--line:rgba(237,205,151,.28);--green:#97dbb4;--danger:#f4ab9b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#f9eed6;background:radial-gradient(circle at 50% -22%,#39526b 0,#142337 46%,#0b1321 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;opacity:.14;pointer-events:none;background-image:radial-gradient(#f9d6a0 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(#000,transparent 95%)}
+button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #afe5e9;outline-offset:3px}
+.app{position:relative;width:min(100% - 20px,850px);margin:18px auto 28px;padding:12px;background:linear-gradient(145deg,#e4bc78,#805328 25%,#d4a05b 44%,#694522 68%,#e3bd7d);border-radius:22px;box-shadow:0 22px 75px #0009,0 0 0 2px #70502d inset}
+.app:before{content:"";position:absolute;inset:6px;border:1px solid #ffdc97;border-radius:18px;pointer-events:none}
+.panel{position:relative;isolation:isolate;border-radius:12px;min-height:calc(100vh - 70px);background:radial-gradient(circle at 100% 0%,#2e4555,transparent 36%),linear-gradient(150deg,#14283b,#112035 65%,#1d2b38);border:2px solid #4e341f;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.16;background-image:repeating-linear-gradient(0deg,transparent,transparent 43px,#d5aa65 44px),repeating-linear-gradient(90deg,transparent,transparent 43px,#d5aa65 44px)}
+.cog{position:absolute;width:116px;height:116px;opacity:.48;z-index:-1;pointer-events:none;color:#e4b875}
+.cog:before{content:"⚙";font:120px Georgia,serif;line-height:1}
+.cog.top{top:-52px;right:-36px;transform:rotate(15deg)}.cog.bottom{bottom:-68px;left:-28px;transform:rotate(70deg)}
+.inner{padding:clamp(20px,5vw,46px);max-width:780px;margin:auto}
+.kicker{color:#d8b67f;font-size:.74rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:2px 0 20px}
+.brand{display:flex;align-items:center;gap:10px;font-size:.82rem;font-weight:700;color:#e5cfaa}
+.brandmark{width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;font-size:17px}
+.stepid{font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#dbc4a4}
+.progress{display:flex;gap:7px;margin-bottom:26px;align-items:center}
+.progress i{height:5px;border-radius:8px;background:#536171;flex:1;transition:background .25s}
+.progress i.on{background:linear-gradient(90deg,#e7c38c,#e89475)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.025em}
+h1{font-size:clamp(2.2rem,7vw,4.3rem);line-height:1.08;margin:12px 0 18px;font-weight:700}
+h2{font-size:clamp(1.8rem,5vw,2.65rem);line-height:1.12;margin:9px 0 15px}
+p{line-height:1.6}.sub{color:#cbd4da;font-size:clamp(.97rem,2.6vw,1.1rem);max-width:650px}
+.gold{color:#f1c989}.em{color:#9edbdd}
+.hero{display:grid;grid-template-columns:1fr 190px;align-items:center;gap:24px;margin-top:25px}
+.clock{height:195px;width:195px;position:relative;border-radius:50%;border:12px ridge #bd9356;box-shadow:0 0 0 5px #4d331f,0 0 0 7px #bf9858,inset 0 0 40px #29291e;background:radial-gradient(circle,#e2c99d 0,#b5925a 75%,#795637);display:grid;place-items:center;color:#453325;font-family:Georgia,serif}
+.clock:before{content:"XII";position:absolute;top:9px;left:50%;transform:translateX(-50%);font-weight:bold;font-size:17px}
+.clock:after{content:"VI";position:absolute;bottom:9px;left:50%;transform:translateX(-50%);font-weight:bold;font-size:17px}
+.hand{width:6px;height:65px;background:#442817;position:absolute;left:calc(50% - 3px);bottom:50%;transform-origin:bottom;transform:rotate(44deg);border-radius:4px}
+.hand.small{height:45px;transform:rotate(233deg);background:#794c28}.clock-dot{background:#3b2a1c;width:15px;height:15px;border:3px solid #d5ac69;border-radius:50%;z-index:2}
+.time-chips{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 26px}
+.time-chips span{padding:8px 11px;border:1px solid var(--line);background:#e6c18a10;border-radius:8px;color:#f3dcc1;font-size:.81rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;border:1px solid transparent;border-radius:11px;padding:12px 22px;font-weight:800;letter-spacing:.01em;background:linear-gradient(145deg,#f5d49e,#c89856);color:#2b221e;box-shadow:0 4px 0 #7c512c,0 11px 22px #0003;transition:transform .14s,filter .14s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #7c512c}
+.btn:disabled{filter:grayscale(.8);opacity:.44;cursor:not-allowed}
+.btn.secondary{color:#f5dfbc;background:#283c50;border-color:#806543;box-shadow:none;font-weight:700}.btn.secondary:active{transform:translateY(1px)}
+.btn.small{min-height:39px;padding:8px 13px;font-size:.84rem}
+.footnote{font-size:.78rem;color:#aebbc3;margin-top:24px;line-height:1.5}
+.footnote a{color:#a8dce2}
+.screen[hidden]{display:none!important}.screen{animation:reveal .38s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.blogger{display:flex;align-items:flex-start;gap:14px;border:1px solid #57717b;background:linear-gradient(100deg,#284757ab,#172b3aac);padding:16px;border-radius:13px;margin:15px 0 23px}
+.avatar{flex:0 0 46px;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;background:#bde1db;color:#193243;font-size:24px}
+.blogger strong{color:#b5e1dc}.blogger p{margin:4px 0 0;color:#e0e9e8;font-size:.95rem;line-height:1.52}
+.section-label{text-transform:uppercase;letter-spacing:.13em;font-size:.71rem;font-weight:900;color:#e3c18f;margin:23px 0 9px}
+.tokens{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.token{min-height:86px;border:1.5px solid #bba270;background:linear-gradient(140deg,#f7e2b7,#dab785);color:#392b25;border-radius:12px;padding:10px;line-height:1.3;font-size:.88rem;font-weight:800;touch-action:manipulation;user-select:none}
+.token[aria-pressed="true"]{outline:3px solid #88d7df;outline-offset:1px;transform:translateY(-2px)}
+.token.used:not([aria-pressed="true"]){opacity:.48}
+.slots{display:grid;gap:11px}.slot-row{display:grid;grid-template-columns:minmax(85px,135px) 1fr;align-items:stretch;gap:11px}
+.year{border-radius:10px;border:1px solid #64707b;background:#1f364a;display:flex;flex-direction:column;justify-content:center;padding:10px 15px}
+.year b{font:700 1.45rem Georgia,serif;color:#ffd59d}.year small{color:#c0ced5;font-size:.75rem;margin-top:4px}
+.drop-slot{min-height:73px;text-align:left;padding:14px;border:1.5px dashed #a99879;background:#1c2f40;color:#f5e6cc;border-radius:10px;font-weight:700;line-height:1.3}
+.drop-slot.filled{border-style:solid;border-color:#dabb85;background:#334054}.drop-slot.wrong{border-color:#f3a29b;box-shadow:inset 0 0 0 1px #f3a29b}
+.placeholder{color:#9fb0b8;font-weight:500}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:21px}
+.message{padding:12px 15px;border-radius:10px;margin-top:16px;border:1px solid #b69a5d;color:#ffe6b9;background:#79602633;line-height:1.48;font-size:.93rem}
+.message[hidden]{display:none}.message.good{border-color:#80bfa4;background:#2e695640;color:#c9f6df}.message.bad{border-color:#f0a392;background:#82453d35;color:#fbd9d2}
+.unlock[hidden]{display:none}.unlock{margin-top:13px}
+.artcard{overflow:hidden;border:2px solid #b59868;border-radius:14px;background:#d5d8cb;margin:18px 0 8px}
+.artcard svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.artcaption{color:#bfcac9;font-size:.81rem;margin:8px 0 0;line-height:1.5}
+#trussTarget{cursor:pointer;outline:none}#trussTarget:focus-visible{filter:drop-shadow(0 0 10px #c6ebf4)}
+#trussTarget.found .beam{stroke:#c4f4a6!important;stroke-width:7!important;filter:drop-shadow(0 0 6px #b5f6c3)}
+.answers{display:grid;gap:10px;margin:20px 0}
+.answer{width:100%;text-align:left;padding:17px 19px;line-height:1.5;font-weight:650;border:1px solid #728b93;border-radius:12px;background:#253c4b;color:#f8e9d0}
+.answer:disabled{cursor:default}.answer.correct{border-color:#9de3ad;background:#1c5647}.answer.incorrect{border-color:#e89e99;background:#653b43}
+.mini-fact{background:linear-gradient(130deg,#c39b5c20,#668e9320);border-left:4px solid #d8b477;padding:12px 16px;border-radius:2px 11px 11px 2px;margin:19px 0;color:#e7d8bf;font-size:.9rem;line-height:1.5}
+.codebox{margin:28px auto 22px;border:2px solid #dcbb7a;border-radius:18px;background:linear-gradient(140deg,#f8e5be,#d3b178);max-width:445px;color:#4a3528;text-align:center;padding:24px 18px;box-shadow:0 13px 0 #5b422e50,0 22px 30px #0004}
+.codebox .caption{font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.codebox .code{font:700 clamp(3.7rem,16vw,6rem) Georgia,serif;line-height:1.17;letter-spacing:.14em;margin:12px 0;color:#643a36}
+.stamp{width:86px;height:86px;border:3px double #9e6240;border-radius:50%;display:grid;place-items:center;transform:rotate(-12deg);margin:10px auto;font-size:12px;line-height:1.2;font-weight:900;text-align:center;color:#8d4943}
+.rule{height:1px;background:var(--line);margin:20px 0}
+@media(max-width:580px){.app{width:calc(100% - 10px);padding:8px;margin:5px auto 15px;border-radius:16px}.panel{border-radius:9px;min-height:calc(100vh - 28px)}.inner{padding:20px 16px 28px}.topline{margin-bottom:14px}.hero{grid-template-columns:1fr;gap:15px}.clock{width:145px;height:145px;border-width:8px;justify-self:center}.clock:before,.clock:after{font-size:12px}.hand{height:49px}.hand.small{height:32px}.tokens{grid-template-columns:1fr}.token{min-height:54px}.slot-row{grid-template-columns:85px 1fr;gap:8px}.year{padding:8px}.year b{font-size:1.18rem}.year small{font-size:.7rem}.drop-slot{padding:9px;min-height:66px;font-size:.85rem}.btn{width:100%}.brand{font-size:.72rem}.stepid{font-size:.65rem}.actions{flex-direction:column;align-items:stretch}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media print{body{background:#fff;color:#111}.app{box-shadow:none}}
+</style>
+</head>
+<body>
+<main class="app" id="questApp"><div class="panel"><span class="cog top" aria-hidden="true"></span><span class="cog bottom" aria-hidden="true"></span><div class="inner">
+<header class="topline"><div class="brand"><span class="brandmark" aria-hidden="true">⌛</span><span>НИЖНИЙ НОВГОРОД · СКВОЗЬ ВЕКА</span></div><span class="stepid" id="stepNumber">Блогер · Глава 4</span></header>
+<div class="progress" aria-label="Прогресс задания"><i id="p1"></i><i id="p2"></i><i id="p3"></i></div>
+
+<section class="screen" id="s0">
+<div class="kicker">📍 Стрелка · Пакгаузы</div>
+<div class="hero"><div><h1>ПАКГАУЗЫ:<br><span class="gold">ПЕРЕКЛЮЧИ ВРЕМЯ</span></h1><p class="sub">Одно место. Три эпохи. Сможешь найти то, что пережило больше века, и разгадать его историю?</p></div><div class="clock" aria-hidden="true"><span class="hand"></span><span class="hand small"></span><span class="clock-dot"></span></div></div>
+<div class="blogger"><div class="avatar" aria-hidden="true">📱</div><div><strong>Блогер на связи!</strong><p>Я нашёл на Стрелке место, которое умеет путешествовать во времени. Твоя миссия — собрать его историю по кусочкам. Готов(а) проверить наблюдательность?</p></div></div>
+<div class="time-chips"><span>⏳ 3 испытания</span><span>🧩 Важны детали</span><span>🎁 Код для следующей точки</span></div>
+<button class="btn" type="button" data-goto="1">Запустить машину времени →</button>
+<p class="footnote">Лучше проходить задание рядом с Пакгаузами: сравнивай экран с реальным зданием. Интернет для самой игры не нужен.</p>
+</section>
+
+<section class="screen" id="s1" hidden>
+<div class="kicker">Испытание 1 из 3 · Хронология</div>
+<h2>Сопоставь эпохи</h2>
+<p class="sub">У этой конструкции было несколько жизней. Выбери карточку с назначением здания, затем нажми на подходящий год. Можно также перетаскивать карточки.</p>
+<div class="section-label">Карточки из архива</div>
+<div class="tokens" id="tokens">
+<button class="token" type="button" draggable="true" data-token="art" aria-pressed="false">🎭 Концертный и выставочный залы</button>
+<button class="token" type="button" draggable="true" data-token="expo" aria-pressed="false">🎪 Выставочный павильон</button>
+<button class="token" type="button" draggable="true" data-token="port" aria-pressed="false">📦 Портовые склады</button>
+</div>
+<div class="section-label">Линия времени</div>
+<div class="slots" id="slots">
+<div class="slot-row"><div class="year"><b>1896</b><small>Империя</small></div><button class="drop-slot" type="button" data-slot="y1896"><span class="placeholder">Нажми, чтобы назначить карточку</span></button></div>
+<div class="slot-row"><div class="year"><b>XX век</b><small>Порт</small></div><button class="drop-slot" type="button" data-slot="y1900"><span class="placeholder">Нажми, чтобы назначить карточку</span></button></div>
+<div class="slot-row"><div class="year"><b>2022</b><small>Наши дни</small></div><button class="drop-slot" type="button" data-slot="y2022"><span class="placeholder">Нажми, чтобы назначить карточку</span></button></div>
+</div>
+<div class="actions"><button class="btn" type="button" id="checkTimeline">Проверить хронологию</button><button class="btn secondary small" type="button" id="clearTimeline">Сбросить</button></div>
+<div class="message" role="status" aria-live="polite" id="timelineFeedback" hidden></div>
+<div class="unlock" id="timelineNext" hidden><div class="mini-fact">Исторический факт: металлические каркасы были созданы ещё для московской выставки 1882 года, а в 1896-м их использовали на выставке в Нижнем Новгороде.</div><button type="button" class="btn" data-goto="2">Открыть испытание 2 →</button></div>
+</section>
+
+<section class="screen" id="s2" hidden>
+<div class="kicker">Испытание 2 из 3 · Наблюдательность</div>
+<h2>Что сохранилось?</h2>
+<div class="blogger"><div class="avatar" aria-hidden="true">🔎</div><div><strong>Блогер:</strong><p>Посмотри на настоящие Пакгаузы перед собой. Затем найди на рисунке и нажми на <b>старинные ажурные металлические конструкции XIX века</b>.</p></div></div>
+<div class="artcard"><svg id="buildingArt" viewBox="0 0 900 485" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="artTitle artDesc">
+<title id="artTitle">Схематическая иллюстрация Пакгаузов</title><desc id="artDesc">Стеклянный культурный центр внутри старинных ажурных металлических арок; нажмите на металлическую конструкцию сверху и по бокам.</desc>
+<defs><linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b5d1ce"/><stop offset="1" stop-color="#f1dbc0"/></linearGradient><linearGradient id="glass" x1="0" x2="1"><stop stop-color="#8ab3ba"/><stop offset=".5" stop-color="#cad7c9"/><stop offset="1" stop-color="#90b8b7"/></linearGradient></defs>
+<rect width="900" height="485" fill="url(#sky)"/>
+<circle cx="750" cy="82" r="42" fill="#ffedc9" opacity=".7"/>
+<path d="M0 350Q110 300 205 334T412 329T690 328T900 306V485H0Z" fill="#97a3a2"/>
+<path d="M0 401Q130 381 250 397T520 399T900 384V485H0Z" fill="#b7b0a1"/>
+<path d="M86 368H829V422H86Z" fill="#53595c" opacity=".8"/>
+<path d="M173 226Q443 61 713 226V383H173Z" fill="url(#glass)" stroke="#577780" stroke-width="4"/>
+<g opacity=".6" stroke="#c7e1d8" stroke-width="4"><path d="M174 301H714M179 337H713M285 190V384M403 149V383M524 165V383M636 191V381"/><path d="M190 291L282 375M293 236L400 377M416 191L525 379M540 226L649 378"/></g>
+<g fill="#56737b"><path d="M253 352H632V384H253Z"/><rect x="366" y="317" width="80" height="67" rx="4" fill="#304d58"/><rect x="456" y="317" width="85" height="67" rx="4" fill="#304d58"/></g>
+<g id="trussTarget" tabindex="0" role="button" aria-label="Выбрать ажурные металлические конструкции">
+<g stroke="#9b603e" stroke-width="7" fill="none" class="beam" stroke-linejoin="round"><path d="M102 375V248Q450 -18 795 248V375"/><path d="M150 375V259Q450 57 750 259V375"/><path d="M104 279Q449 21 794 279"/><path d="M102 375H793"/></g>
+<g stroke="#ad7550" stroke-width="4.5" opacity=".9" fill="none" class="beam"><path d="M106 348L152 287L104 277L157 340L104 348M750 285L795 348L747 340L795 278L747 286"/><path d="M157 259L199 185L220 242L252 154L287 219L329 120L367 193L407 105L446 182L486 109L529 194L573 121L612 218L651 157L679 246L711 196L747 261"/><path d="M156 303L213 234L254 283L299 197L347 245L397 167L448 213L496 163L549 247L597 194L647 289L699 237L748 303"/></g>
+<path d="M102 375V248Q450 -18 795 248V375 M150 375V259Q450 57 750 259V375 M104 279Q449 21 794 279 M102 375H793" fill="none" stroke="transparent" stroke-width="42" style="pointer-events:stroke"/>
+</g>
+<g opacity=".85"><path d="M0 420H900V485H0Z" fill="#777b77"/><path d="M0 438H900" stroke="#e3d3b2" stroke-width="3"/><path d="M0 461H900" stroke="#565d5b" stroke-width="3"/></g>
+<g transform="translate(54 365)"><rect width="195" height="41" rx="7" fill="#1c3745" opacity=".9"/><text x="97" y="27" text-anchor="middle" fill="#fff3d8" font-size="21" font-family="Arial, sans-serif" font-weight="bold">ПАКГАУЗЫ</text></g>
+</svg></div>
+<p class="artcaption">Это стилизованная схема, а не фотография. Сравни её с сооружением перед собой.</p>
+<div class="message" id="visualFeedback" role="status" aria-live="polite" hidden></div>
+<div class="unlock" id="visualNext" hidden><div class="mini-fact">Верно! Ажурный металлический каркас — историческая часть Пакгаузов. Новое пространство построили так, чтобы сохранить и показать старую конструкцию.</div><button type="button" class="btn" data-goto="3">Открыть испытание 3 →</button></div>
+</section>
+
+<section class="screen" id="s3" hidden>
+<div class="kicker">Испытание 3 из 3 · Твой выбор</div>
+<h2>Как поступить с историей?</h2>
+<p class="sub">Ты стал(а) городским блогером. Как лучше объяснить подписчикам, зачем Нижнему Новгороду были нужны обновлённые Пакгаузы?</p>
+<div class="answers" id="answers">
+<button type="button" class="answer" data-choice="erase">Старые постройки надо сносить — они всегда мешают развитию города.</button>
+<button type="button" class="answer" data-choice="preserve">Ценные исторические детали можно сохранить и приспособить здание к современной жизни.</button>
+<button type="button" class="answer" data-choice="hide">Лучше спрятать старую конструкцию за новой облицовкой, чтобы её никто не заметил.</button>
+</div>
+<div class="message" id="choiceFeedback" role="status" aria-live="polite" hidden></div>
+<div id="finishNext" class="unlock" hidden><button type="button" class="btn" data-goto="4">Получить код-подсказку →</button></div>
+</section>
+
+<section class="screen" id="s4" hidden>
+<div class="kicker">Миссия выполнена · Современность</div>
+<h1>ВРЕМЯ<br><span class="gold">РАСКРЫЛО СЕКРЕТ!</span></h1>
+<div class="blogger"><div class="avatar" aria-hidden="true">📱</div><div><strong>Сообщение блогера</strong><p>Ты восстановил(а) три этапа истории Пакгаузов, нашёл(ла) исторический каркас и принял(а) важное решение. Держи секретный код для продолжения квеста!</p></div></div>
+<div class="codebox"><div class="caption">Секретная подсказка</div><div class="code" id="rewardCode">АЖУР</div><div class="stamp">ХРАНИТЕЛЬ<br>ВРЕМЕНИ<br>✓</div><div>Цифровая печать получена</div></div>
+<p class="sub"><b>Сделай скриншот экрана</b> или запомни код. Покажи его ведущему, чтобы получить следующую подсказку, и продолжай маршрут к стадиону «Нижний Новгород».</p>
+<div class="actions"><button class="btn secondary" id="restart" type="button">↻ Пройти заново</button></div>
+<p class="footnote">Этот код — не название заведения с финальными сувенирами. Оно откроется только после сбора всех четырёх страниц летописи.</p>
+</section>
+<div class="rule"></div><footer class="footnote">Историческая основа: <a href="https://packhouses.strelkapark.ru/" rel="noopener noreferrer" target="_blank">официальный сайт Пакгаузов</a>. Работа игры не зависит от доступа к сайту. Разработано для городского квеста «Нижний Новгород — сквозь века».</footer>
+</div></div></main>
+<script>
+'use strict';
+// Настройка организатора: здесь можно заменить код, который участники получают в финале.
+const FINAL_CODE = 'АЖУР';
+const screens = [...document.querySelectorAll('.screen')];
+let unlocked = 1;
+let current = 0;
+let picked = null;
+let positions = {};
+let timelineErrors = 0;
+let visualErrors = 0;
+const tokens = {expo:'🎪 Выставочный павильон',port:'📦 Портовые склады',art:'🎭 Концертный и выставочный залы'};
+const truth = {y1896:'expo',y1900:'port',y2022:'art'};
+function showScreen(index){
+ if(index>unlocked && index!==0)return;
+ current=index;
+ screens.forEach((s,i)=>s.hidden=i!==index);
+ const count=index===0?0:index===4?3:index-1;
+ for(let i=1;i<=3;i++)document.getElementById('p'+i).classList.toggle('on',i<=count);
+ document.getElementById('stepNumber').textContent=index===0?'Блогер · Глава 4':index===4?'Печать получена':`Задание ${index} / 3`;
+ window.scrollTo({top:0,behavior:'instant'});
+}
+function notice(element,copy,kind){element.hidden=false;element.className='message '+(kind||'');element.textContent=copy;}
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{
+ const next=Number(b.dataset.goto);if(next>unlocked)unlocked=next;showScreen(next);
+}));
+function updateTimeline(){
+ document.querySelectorAll('.token').forEach(t=>{
+  const assigned=Object.values(positions).includes(t.dataset.token);
+  t.classList.toggle('used',assigned);t.setAttribute('aria-pressed',String(picked===t.dataset.token));
+ });
+ document.querySelectorAll('.drop-slot').forEach(slot=>{
+  const id=slot.dataset.slot;const assignment=positions[id];
+  slot.innerHTML=assignment?tokens[assignment]:'<span class="placeholder">Нажми, чтобы назначить карточку</span>';
+  slot.classList.toggle('filled',Boolean(assignment));
+  slot.setAttribute('aria-label',(id==='y1896'?'1896':id==='y1900'?'XX век':'2022')+': '+(assignment?tokens[assignment]:'пусто'));
+ });
+}
+function assign(token,slot){
+ if(!token){
+  if(positions[slot]){delete positions[slot];document.querySelector('[data-slot="'+slot+'"]').classList.remove('wrong');updateTimeline();}
+  else notice(document.getElementById('timelineFeedback'),'Сначала выбери карточку из архива, потом нажми на год.','');
+  return;
+ }
+ for(const k of Object.keys(positions))if(positions[k]===token)delete positions[k];
+ positions[slot]=token;picked=null;
+ document.querySelectorAll('.drop-slot').forEach(x=>x.classList.remove('wrong'));
+ document.getElementById('timelineFeedback').hidden=true;updateTimeline();
+}
+document.querySelectorAll('.token').forEach(t=>{
+ t.addEventListener('click',()=>{picked=picked===t.dataset.token?null:t.dataset.token;updateTimeline();});
+ t.addEventListener('dragstart',e=>{picked=t.dataset.token;e.dataTransfer.setData('text/plain',picked);e.dataTransfer.effectAllowed='move';updateTimeline();});
+});
+document.querySelectorAll('.drop-slot').forEach(slot=>{
+ slot.addEventListener('click',()=>assign(picked,slot.dataset.slot));
+ slot.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='move';});
+ slot.addEventListener('drop',e=>{e.preventDefault();let id=e.dataTransfer.getData('text/plain');if(tokens[id])assign(id,slot.dataset.slot);});
+});
+document.getElementById('checkTimeline').addEventListener('click',()=>{
+ const fb=document.getElementById('timelineFeedback');
+ const all=Object.keys(truth).every(k=>positions[k]);
+ if(!all){notice(fb,'Не все эпохи заполнены. Расставь три карточки по годам.','bad');return;}
+ const wrong=Object.keys(truth).filter(k=>positions[k]!==truth[k]);
+ document.querySelectorAll('.drop-slot').forEach(x=>x.classList.toggle('wrong',wrong.includes(x.dataset.slot)));
+ if(wrong.length){timelineErrors++;notice(fb,timelineErrors===1?'Почти! Проверь подсвеченные эпохи. В 2022 году Пакгаузы стали культурным пространством.':'Подсказка: 1896 — большая выставка; XX век — грузы в порту; 2022 — искусство и музыка.','bad');return;}
+ notice(fb,'Точно! Все три эпохи восстановлены. +1 историческое открытие.','good');
+ document.getElementById('timelineNext').hidden=false;
+ document.getElementById('checkTimeline').disabled=true;
+ document.querySelectorAll('.token,.drop-slot').forEach(x=>x.disabled=true);
+});
+document.getElementById('clearTimeline').addEventListener('click',()=>{
+ if(!document.getElementById('timelineNext').hidden)return;
+ positions={};picked=null;document.getElementById('timelineFeedback').hidden=true;
+ document.querySelectorAll('.drop-slot').forEach(x=>x.classList.remove('wrong'));updateTimeline();
+});
+const svg=document.getElementById('buildingArt');
+const truss=document.getElementById('trussTarget');
+function correctTruss(){
+ if(!document.getElementById('visualNext').hidden)return;
+ truss.classList.add('found');
+ notice(document.getElementById('visualFeedback'),'Найдено! Именно металлический ажурный каркас связывает историю выставки XIX века с современными Пакгаузами.','good');
+ document.getElementById('visualNext').hidden=false;
+}
+truss.addEventListener('click',e=>{e.stopPropagation();correctTruss();});
+truss.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();correctTruss();}});
+svg.addEventListener('click',e=>{
+ if(e.target.closest('#trussTarget'))return;
+ visualErrors++;
+ notice(document.getElementById('visualFeedback'),visualErrors===1?'Пока нет. Ищи не стекло и не стены, а переплетающиеся металлические линии вокруг здания.':'Подсказка: посмотри на большие арки и диагональные металлические перемычки сверху.','bad');
+});
+document.querySelectorAll('.answer').forEach(b=>b.addEventListener('click',()=>{
+ if(!document.getElementById('finishNext').hidden)return;
+ const yes=b.dataset.choice==='preserve';
+ document.querySelectorAll('.answer').forEach(x=>x.classList.remove('incorrect'));
+ b.classList.add(yes?'correct':'incorrect');
+ notice(document.getElementById('choiceFeedback'),yes?'Верно! Историю можно сохранять не только в музеях: старые конструкции могут стать частью нового городского пространства.':'Попробуй ещё. Что позволит сохранить подлинные исторические детали и при этом использовать сооружение сегодня?',yes?'good':'bad');
+ if(yes){document.getElementById('finishNext').hidden=false;document.querySelectorAll('.answer').forEach(x=>x.disabled=true);}
+}));
+document.getElementById('rewardCode').textContent=FINAL_CODE;
+document.getElementById('restart').addEventListener('click',()=>{
+ unlocked=1;current=0;picked=null;positions={};timelineErrors=0;visualErrors=0;
+ document.getElementById('timelineFeedback').hidden=true;
+ document.getElementById('timelineNext').hidden=true;
+ document.getElementById('visualFeedback').hidden=true;
+ document.getElementById('visualNext').hidden=true;
+ document.getElementById('choiceFeedback').hidden=true;
+ document.getElementById('finishNext').hidden=true;
+ document.getElementById('checkTimeline').disabled=false;
+ document.querySelectorAll('.token,.drop-slot,.answer').forEach(x=>x.disabled=false);
+ document.querySelectorAll('.drop-slot,.answer').forEach(x=>x.classList.remove('wrong','correct','incorrect'));
+ truss.classList.remove('found');updateTimeline();showScreen(0);
+});
+updateTimeline();showScreen(0);
+</script>
+</body></html>
